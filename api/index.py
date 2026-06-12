@@ -9,27 +9,14 @@ from difflib import SequenceMatcher
 
 
 app = Flask(__name__)
-CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "https://vemo-ai.vercel.app",
-            "http://localhost:3000",
-            "https://vemo-smart-parking-mobility-assistant-production.up.railway.app"
-        ],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type"]
-    }
-})
+CORS(app)
 
-@app.before_request
-def handle_options():
-    from flask import request, Response
-    if request.method == "OPTIONS":
-        res = Response()
-        res.headers['Access-Control-Allow-Origin'] = '*'
-        res.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-        res.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        return res
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    return response
 
         
 # Base path — points to project root from api/ folder

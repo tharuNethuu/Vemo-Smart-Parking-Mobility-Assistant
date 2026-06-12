@@ -6,6 +6,8 @@ import os
 from groq import Groq
 from difflib import SequenceMatcher
 
+
+
 app = Flask(__name__)
 CORS(app, resources={
     r"/api/*": {
@@ -105,8 +107,6 @@ Instructions:
 
 Write as if you are talking directly to the driver. Use some emojis to make it friendly and engaging!
 """
-# Load parking notes dataset as knowledge base
-knowledge_base = pd.read_csv('../../data/raw/parking_notes.csv')
 
 def fuzzy_match_score(a, b):
     return SequenceMatcher(None, a.lower(), b.lower()).ratio()

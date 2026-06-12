@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { MapPin, Clock, Leaf, ChevronRight, Loader } from "lucide-react";
+import { MapPin, Clock, Leaf, Loader } from "lucide-react";
 import "./Pages.css";
 import ReactMarkdown from "react-markdown";
 
@@ -18,7 +18,7 @@ export default function Optimizer() {
     setError("");
     setResult(null);
     try {
-      const res = await axios.post("http://localhost:5000/api/recommend", {
+      const res = await axios.post("https://vemo-smart-parking-mobility-assistant-production.up.railway.app/api/recommend", {
         hour, dayEncoded
       });
       setResult(res.data);

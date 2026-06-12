@@ -1,0 +1,422 @@
+.page {
+  padding    : 0 0 24px 0;
+  min-height : 100vh;
+}
+
+/* Header */
+.page-header {
+  background    : linear-gradient(180deg, #018121, #000000);
+  padding       : 100px 20px 24px;
+  display       : flex;
+  align-items   : center;
+  gap           : 14px;
+  border-radius : 0 0 28px 28px;
+  margin-bottom : 20px;
+  position      : relative;
+}
+.vemo-logo {
+  width: 80px;
+  height: auto;
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+.header-icon {
+  background    : rgba(255,255,255,0.2);
+  border-radius : 14px;
+  padding       : 10px;
+  display       : flex;
+}
+
+.header-title {
+  color       : #fff;
+  font-size   : 22px;
+  font-weight : 700;
+}
+
+.header-sub {
+  color     : rgba(255,255,255,0.85);
+  font-size : 13px;
+}
+
+/* Cards */
+.card {
+  background    : var(--dark-text);
+  border-radius : var(--radius);
+  padding       : 18px;
+  margin        : 0 16px 14px;
+  box-shadow    : var(--shadow);
+}
+
+.card-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.card-label-icon {
+  width: 120px;
+  height: auto;
+  flex-shrink: 0; /* prevents image from shrinking */
+}
+
+/* Inputs */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  display      : flex;
+  align-items  : center;
+  gap          : 5px;
+  font-size    : 13px;
+  color        : var(--gray-text);
+  margin-bottom: 8px;
+}
+
+.slider {
+  width             : 100%;
+  accent-color      : var(--green-primary);
+  height            : 4px;
+  cursor            : pointer;
+}
+
+.slider-value {
+  display     : block;
+  text-align  : right;
+  font-size   : 13px;
+  font-weight : 600;
+  color       : var(--green-primary);
+  margin-top  : 4px;
+}
+
+.select-input {
+  width         : 100%;
+  padding       : 12px 14px;
+  border        : 1.5px solid var(--gray-mid);
+  border-radius : 12px;
+  font-size     : 14px;
+  background    : var(--gray-light);
+  color         : var(--dark-text);
+  outline       : none;
+  cursor        : pointer;
+}
+
+.select-input:focus {
+  border-color: var(--green-primary);
+}
+
+.text-area {
+  width         : 100%;
+  padding       : 12px 14px;
+  border        : 1.5px solid var(--gray-mid);
+  border-radius : 12px;
+  font-size     : 14px;
+  background    : var(--gray-light);
+  color         : var(--dark-text);
+  outline       : none;
+  resize        : none;
+  font-family   : inherit;
+  margin-bottom : 16px;
+  line-height    : 1.4;
+}
+
+.text-area:focus {
+  border-color: var(--green-primary);
+}
+
+/* Button */
+.btn-primary {
+  width          : 100%;
+  padding        : 14px;
+  background     : linear-gradient(135deg, #015827, #157a01, #015827);
+  color          : #fff;
+  border         : none;
+  border-radius  : 14px;
+  font-size      : 15px;
+  font-weight    : 600;
+  cursor         : pointer;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  gap            : 8px;
+  transition     : opacity 0.2s;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor : not-allowed;
+}
+
+.error-text {
+  color      : #e63946;
+  font-size  : 13px;
+  margin-top : 10px;
+  text-align : center;
+}
+
+/* Highlight card */
+.highlight-card {
+  background : linear-gradient(135deg, #f7fcf9, #bef7b3);
+  border     : 1.5px solid var(--green-soft);
+}
+
+.highlight-row {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+  margin-bottom  : 12px;
+}
+
+.highlight-label {
+  font-size  : 12px;
+  color      : #015827;
+  margin-bottom: 4px;
+}
+
+.highlight-value {
+  font-size   : 22px;
+  font-weight : 700;
+  color       : #015827;
+}
+
+.occupancy-badge {
+  background    : linear-gradient(135deg, #015827, #157a01);
+  color         : #fff;
+  font-size     : 18px;
+  font-weight   : 700;
+  padding       : 10px 16px;
+  border-radius : 14px;
+}
+
+.co2-row {
+  display    : flex;
+  align-items: center;
+  gap        : 6px;
+  font-size  : 13px;
+  color      : #015827;
+  font-weight: 500;
+}
+
+/* Park rows */
+.park-row {
+  display    : flex;
+  align-items: center;
+  gap        : 10px;
+  padding    : 8px 0;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.park-row:last-child { border-bottom: none; }
+
+.park-rank {
+  font-size  : 12px;
+  color      : var(--gray-text);
+  width      : 20px;
+}
+
+.park-name {
+  font-size  : 13px;
+  font-weight: 500;
+  width      : 65px;
+}
+
+.park-bar-wrap {
+  flex          : 1;
+  height        : 8px;
+  background    : var(--gray-light);
+  border-radius : 4px;
+  overflow      : hidden;
+}
+
+.park-bar {
+  height        : 8px;
+  border-radius : 4px;
+  transition    : width 0.6s ease;
+}
+
+.park-pct {
+  font-size  : 12px;
+  font-weight: 600;
+  width      : 36px;
+  text-align : right;
+}
+
+/* AI card */
+.ai-card {
+  border-left: 4px solid var(--green-primary);
+}
+
+.ai-header {
+  display    : flex;
+  align-items: center;
+  gap        : 8px;
+  font-size  : 14px;
+  font-weight: 600;
+  color      : var(--green-mid);
+  margin-bottom: 10px;
+}
+
+.ai-dot {
+  width         : 8px;
+  height        : 8px;
+  background    : var(--green-primary);
+  border-radius : 50%;
+}
+
+.ai-text {
+  font-size  : 14px;
+  line-height: 1.6;
+  color      : var(--gray-light);
+  white-space: pre-wrap;
+}
+
+/* Entity grid */
+.entity-grid {
+  display              : grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap                  : 10px;
+}
+
+.entity-item {
+  background    : var(--green-light);
+  border-radius : 14px;
+  padding       : 12px 10px;
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : 4px;
+  text-align    : center;
+}
+
+.entity-label {
+  font-size  : 11px;
+  color      : var(--gray-text);
+  font-weight: 500;
+}
+
+.entity-value {
+  font-size  : 15px;
+  font-weight: 700;
+  color      : var(--green-primary);
+}
+
+.note-text {
+  font-size  : 14px;
+  color      : var(--gray-text);
+  font-style : italic;
+  line-height: 1.5;
+}
+/* Conflict card */
+.conflict-card {
+  border-left : 4px solid #e63946;
+  background  : #fff5f5;
+}
+
+.conflict-title {
+  font-size    : 14px;
+  font-weight  : 600;
+  color        : #e63946;
+  margin-bottom: 6px;
+}
+
+.conflict-text {
+  font-size  : 13px;
+  color      : #555;
+  line-height: 1.5;
+}
+
+/* Inferred badge */
+.inferred-badge {
+  background    : #fff3cd;
+  color         : #856404;
+  font-size     : 9px;
+  font-weight   : 600;
+  padding       : 2px 6px;
+  border-radius : 6px;
+  text-transform: uppercase;
+}
+
+/* Confidence bar */
+.confidence-row {
+  display    : flex;
+  align-items: center;
+  gap        : 8px;
+  margin-top : 14px;
+  padding-top: 12px;
+  border-top : 1px solid var(--gray-light);
+}
+
+.confidence-label {
+  font-size : 11px;
+  color     : var(--gray-text);
+  width     : 140px;
+  flex-shrink: 0;
+}
+
+.confidence-bar-wrap {
+  flex          : 1;
+  height        : 6px;
+  background    : var(--gray-mid);
+  border-radius : 4px;
+  overflow      : hidden;
+}
+
+.confidence-bar {
+  height        : 6px;
+  background    : linear-gradient(90deg, #52b788, #2d7a4f);
+  border-radius : 4px;
+  transition    : width 0.6s ease;
+}
+
+.confidence-score {
+  font-size  : 12px;
+  font-weight: 700;
+  color      : var(--green-primary);
+  width      : 36px;
+  text-align : right;
+}
+
+/* Candidate rows */
+.candidate-row {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  padding        : 8px 0;
+  border-bottom  : 1px solid var(--gray-light);
+  gap            : 8px;
+}
+
+.candidate-row:last-child { border-bottom: none; }
+
+.candidate-landmark {
+  font-size : 13px;
+  color     : var(--dark-text);
+  flex      : 1;
+}
+
+.candidate-info {
+  font-size : 12px;
+  color     : var(--gray-text);
+}
+
+.candidate-score {
+  font-size  : 12px;
+  font-weight: 600;
+  color      : var(--green-primary);
+}
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spin {
+  animation: spin 0.8s linear infinite;
+}

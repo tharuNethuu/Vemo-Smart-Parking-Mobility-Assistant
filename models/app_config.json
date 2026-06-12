@@ -1,0 +1,6 @@
+{
+  "groq_model": "llama3-8b-8192",
+  "num_parks": 18,
+  "spacy_model_path": "../models/spacy_ner_model",
+  "best_model_path": "../models/best_model.pkl"
+}

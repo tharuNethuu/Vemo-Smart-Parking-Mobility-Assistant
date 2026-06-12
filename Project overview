@@ -1,0 +1,273 @@
+
+# Step 1: Narrow Down the Scope
+
+Don't try to build a full smart parking system. Focus on these two core modules:
+
+### Module A: Green Parking Optimizer
+
+Predict and recommend the best parking area based on:
+
+* Time
+* Day
+* Occupancy level
+* Walking distance
+
+### Module B: AI Memory Assistant
+
+Allow users to:
+
+* Save parking notes
+* Retrieve parking location using natural language
+
+---
+
+# Step 2: Map AI Techniques to Features
+
+You need at least 3 techniques.
+
+| Requirement        | Implementation                                                          |
+| ------------------ | ----------------------------------------------------------------------- |
+| NLP                | Extract location information from parking notes                         |
+| Transformer Model  | Fine-tuned BERT for extracting parking entities (zone, floor, landmark) |
+| Generative AI      | Generate parking recommendations and summaries                          |
+| Prompt Engineering | Create structured prompts for recommendation generation                 |
+
+This already satisfies the assignment.
+
+---
+
+# Step 3: Define Your Research Problem
+
+A good problem statement could be:
+
+> Drivers waste time and fuel searching for parking spaces, contributing to congestion and carbon emissions. Additionally, many drivers struggle to remember where they parked in large parking facilities. This project proposes an AI-powered parking assistant that predicts optimal parking locations while providing intelligent parking memory support.
+
+---
+
+# Step 4: Find Datasets
+
+## Parking Occupancy Dataset
+
+Search Kaggle for:
+
+* Smart Parking Dataset
+* Parking Occupancy Prediction Dataset
+* Parking Birmingham Dataset
+
+Useful search terms:
+
+* "parking occupancy"
+* "smart parking"
+* "parking prediction"
+
+These datasets typically contain:
+
+* Timestamp
+* Occupancy
+* Parking lot ID
+
+Perfect for prediction.
+
+---
+
+## NLP Dataset for Memory Assistant
+
+You can create your own.
+
+Example:
+
+| User Note                      | Zone | Floor | Landmark             |
+| ------------------------------ | ---- | ----- | -------------------- |
+| Near blue pillar in Zone A     | A    | -     | blue pillar          |
+| Level 2 beside elevator        | -    | 2     | elevator             |
+| Near Engineering Building gate | -    | -     | Engineering Building |
+
+100–300 examples are enough for a course project.
+
+---
+
+# Step 5: System Architecture
+
+```text
+User
+ │
+ ▼
+Web App (React/Streamlit)
+ │
+ ├── Green Parking Optimizer
+ │     ├─ Occupancy Prediction Model
+ │     ├─ Recommendation Engine
+ │     └─ CO₂ Estimator
+ │
+ └── AI Memory Assistant
+       ├─ NLP Entity Extraction
+       ├─ BERT Model
+       └─ Parking Retrieval System
+```
+
+---
+
+# Step 6: Build MVP First
+
+### Week 1
+
+Dataset collection
+Literature review
+System design
+
+Deliverables:
+
+* Problem statement
+* Architecture diagram
+* Dataset selection
+
+---
+
+### Week 2
+
+Build parking prediction model
+
+Try:
+
+* Random Forest
+* XGBoost
+
+Metrics:
+
+* MAE
+* RMSE
+
+---
+
+### Week 3
+
+Build Memory Assistant
+
+Example:
+
+Input:
+
+> "I parked near the blue sign on Level 3."
+
+Output:
+
+```json
+{
+  "floor": "3",
+  "landmark": "blue sign"
+}
+```
+
+Initially use SpaCy.
+
+Later compare with BERT.
+
+---
+
+### Week 4
+
+Add Generative AI
+
+Example prompt:
+
+```text
+User arrival time: 8:30 AM
+Predicted occupancy:
+Zone A: 90%
+Zone B: 45%
+Zone C: 20%
+
+Generate a parking recommendation emphasizing reduced search time and lower emissions.
+```
+
+Output:
+
+> Zone C is recommended because it has the highest availability and is expected to reduce unnecessary driving within the parking facility, lowering fuel consumption and emissions.
+
+---
+
+### Week 5
+
+Frontend
+
+Options:
+
+* Streamlit (fastest)
+* React + Flask (better demo)
+
+For a course project, Streamlit is usually enough.
+
+---
+
+### Week 6
+
+Evaluation
+Video
+Final report
+
+---
+
+# Features That Will Impress Evaluators
+
+### CO₂ Savings Calculator
+
+Show:
+
+```text
+Normal parking search:
+8 min
+
+GreenPark AI:
+3 min
+
+Estimated CO₂ saved:
+110 g
+```
+
+### Parking Habit Insights
+
+Example:
+
+> You typically arrive between 8:00–8:30 AM on weekdays. Parking availability increases significantly before 7:50 AM.
+
+### Voice Parking Notes
+
+User says:
+
+> I parked near the library entrance beside the red pillar.
+
+AI stores structured information automatically.
+
+---
+
+# Suggested Tech Stack
+
+### AI
+
+* Python
+* Scikit-learn
+* Hugging Face Transformers
+* SpaCy
+* Pandas
+
+### Generative AI
+
+* OpenAI API or open-source LLM (Llama/Mistral)
+
+### Frontend
+
+* Streamlit (recommended)
+  or
+* React
+
+### Backend
+
+* Flask or FastAPI
+
+---
+
+A particularly strong research angle would be:
+
+**"Can AI-driven parking recommendations reduce estimated parking search emissions while improving parking retrieval efficiency?"**
+
+That gives you a clear objective, measurable metrics, and enough AI depth for a high-scoring project.

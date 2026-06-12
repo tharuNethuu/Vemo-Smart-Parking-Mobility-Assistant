@@ -1,0 +1,5 @@
+{
+  "spacy_accuracy": 75.0,
+  "bert_accuracy": 50.0,
+  "winner": "SpaCy"
+}

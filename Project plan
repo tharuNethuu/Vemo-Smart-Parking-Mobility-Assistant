@@ -1,0 +1,170 @@
+Let me first read your project document properly to give you accurate step-by-step guidance.Based on your uploaded project plan and the Birmingham dataset, here is your complete step-by-step roadmap:
+
+---
+
+## 🗓️ Your Step-by-Step Project Guide
+
+---
+
+### **PHASE 1 — Setup & Preparation (Do This First)**
+
+**Step 1: Set up your environment**
+- Install Python (3.9+ recommended)
+- Install these libraries by running:
+```bash
+pip install pandas numpy scikit-learn xgboost matplotlib seaborn streamlit spacy transformers torch
+```
+- Download the **Parking Birmingham dataset** from Kaggle (search "Parking Birmingham UCI")
+
+**Step 2: Create your project folder structure**
+```
+greenpark-ai/
+├── data/
+│   ├── raw/          ← put Birmingham CSV here
+│   └── processed/
+├── notebooks/        ← your Jupyter notebooks
+├── models/           ← saved trained models
+├── app/              ← Streamlit frontend
+└── report/
+```
+
+---
+
+### **PHASE 2 — Data Work (Week 1)**
+
+**Step 3: Explore and clean the dataset**
+
+Open a Jupyter notebook and do exactly what the notebook in your document shows:
+- Load the CSV
+- Remove duplicates, negative occupancy, occupancy > capacity
+- Add `OccupancyRate` column
+- Extract `Date`, `Time`, `DayOfWeek` columns
+- Plot occupancy by time and by car park
+
+This becomes your **EDA section** in the report.
+
+**Step 4: Prepare features for ML**
+
+Create these input features:
+- Hour (extracted from Time)
+- DayOfWeek (Mon=0 to Sun=6)
+- SystemCodeNumber (encoded as numbers)
+- Previous occupancy (lag feature)
+
+Target variable: `OccupancyRate`
+
+Split: last week of data = test, rest = train (already shown in your notebook).
+
+---
+
+### **PHASE 3 — Module A: Parking Prediction (Week 2)**
+
+**Step 5: Train your prediction model**
+
+Train two models and compare:
+```python
+from sklearn.ensemble import RandomForestRegressor
+from xgboost import XGBRegressor
+```
+Evaluate both using:
+- MAE (Mean Absolute Error)
+- RMSE (Root Mean Square Error)
+
+Pick the better one. This is your **Green Parking Optimizer**.
+
+**Step 6: Build the recommendation logic**
+
+Using your model's predictions, write a simple function:
+- Input: arrival time + day
+- Output: which car park has lowest predicted occupancy → recommend that one
+- Add CO₂ saving estimate (compare search time of recommended vs average)
+
+---
+
+### **PHASE 4 — Module B: Memory Assistant (Week 3)**
+
+**Step 7: Create your NLP dataset**
+
+Manually write 150–200 rows in a CSV like this:
+
+| note | zone | floor | landmark |
+|---|---|---|---|
+| Near blue pillar in Zone A | A | - | blue pillar |
+| Level 2 beside elevator | - | 2 | elevator |
+
+Save as `parking_notes.csv`. This is your own dataset for NLP.
+
+**Step 8: Build entity extractor with SpaCy**
+
+Train a simple SpaCy NER model to extract Zone, Floor, Landmark from notes. Test it on 20–30 examples.
+
+**Step 9: Compare with BERT**
+
+Use HuggingFace's `bert-base-uncased` for the same task. Compare F1-score of SpaCy vs BERT. This comparison is what earns marks for the Transformer requirement.
+
+---
+
+### **PHASE 5 — Generative AI Layer (Week 4)**
+
+**Step 10: Add LLM recommendation summary**
+
+Use OpenAI API or a free alternative (Groq with Llama/Mistral). Build a prompt like:
+
+```
+Arrival time: 8:30 AM
+Zone A: 88% full
+Zone B: 42% full
+Zone C: 19% full
+
+Recommend the best parking zone focusing on availability and CO₂ savings.
+```
+
+Feed your model's predictions into this prompt. The LLM writes the human-friendly recommendation.
+
+---
+
+### **PHASE 6 — Frontend (Week 5)**
+
+**Step 11: Build Streamlit app**
+
+Create `app/main.py` with two pages:
+- **Page 1:** User enters arrival time + day → see prediction + LLM recommendation + CO₂ saved
+- **Page 2:** User types parking note → see extracted zone/floor/landmark
+
+Run with: `streamlit run app/main.py`
+
+---
+
+### **PHASE 7 — Evaluation & Report (Week 6)**
+
+**Step 12: Evaluate everything**
+
+| Module | Metric |
+|---|---|
+| Prediction model | MAE, RMSE — compare RF vs XGBoost |
+| NLP extractor | F1-score — compare SpaCy vs BERT |
+| Recommendation | User test or sample output quality |
+
+**Step 13: Write the report**
+
+Sections to include:
+1. Problem Statement
+2. Related Work (find 5–6 papers on smart parking + NLP)
+3. System Architecture diagram
+4. Dataset description + EDA
+5. Module A results
+6. Module B results
+7. Generative AI integration
+8. Evaluation
+9. Conclusion
+
+---
+
+## ✅ What to Do Right Now (Today)
+
+Start with just these 3 things:
+1. Download the Birmingham dataset from Kaggle
+2. Set up your folder structure
+3. Run the EDA notebook (Step 3) — it's basically already written for you in your document
+
+Tell me when you finish each phase and I'll guide you through the next one in detail with actual code.

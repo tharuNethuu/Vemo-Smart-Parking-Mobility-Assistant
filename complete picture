@@ -1,0 +1,67 @@
+## What You Built — GreenPark AI / Vemo
+
+Think of it as a **smart parking assistant app** that does two things:
+
+---
+
+### Problem It Solves
+
+Every day drivers waste time driving around looking for parking. This wastes fuel, creates traffic, and produces unnecessary CO₂ emissions. Also, people often forget where they parked in large parking facilities.
+
+---
+
+### Solution — Two Modules
+
+**Module 1: Green Parking Optimizer**
+You tell the app what time you're arriving and what day it is. The app predicts how busy each parking zone will be and recommends the best one. It also tells you how much CO₂ you're saving by choosing a less busy zone instead of driving around searching.
+
+**Module 2: AI Memory Assistant**
+You type a quick note like *"parked near the yellow barrier"*. The app extracts the important details — zone, floor, landmark — and if you only mentioned the landmark, it's smart enough to look it up in the database and figure out which zone it belongs to. Then it gives you a friendly summary of where your car is.
+
+---
+
+### How Each Part Works Simply
+
+**The Data**
+You used real parking data from Birmingham UK — 35,000 records of parking occupancy across 18 car parks over 12 weeks. This taught the system when and where parking gets busy.
+
+**The Prediction Model**
+You trained two machine learning models — Random Forest and XGBoost — to predict how full a car park will be at any given time and day. Random Forest turned out to be more accurate so that's the one being used.
+
+**The NLP Model**
+You created your own dataset of 100 parking notes and trained a SpaCy model to read a sentence and pull out three things — zone, floor, and landmark. You also tested BERT on the same task and compared which one does better. SpaCy won for your dataset.
+
+**The Landmark Lookup**
+This is the smart improvement you added. When someone says *"near the yellow barrier"* but doesn't mention the zone, the system searches your parking notes database using fuzzy matching — meaning it finds the closest match even if the wording isn't exactly the same — and figures out the zone automatically.
+
+**The AI Layer**
+You connected Groq's free LLaMA model to generate human-friendly responses. Instead of just showing raw numbers, the app explains the recommendation in natural language — like a real assistant talking to you.
+
+**The App**
+Everything is connected through a React mobile web app with a clean green and white design. It has two screens — one for the parking optimizer and one for the memory assistant — with a navigation bar at the bottom just like a real mobile app.
+
+---
+
+### The Tech Stack Simply
+
+| Part | What it does |
+|---|---|
+| Pandas + Python | Clean and prepare the data |
+| Random Forest | Predict parking occupancy |
+| SpaCy | Read parking notes and extract key info |
+| BERT | Compared against SpaCy for NLP |
+| Fuzzy Matching | Find landmarks even with slightly different wording |
+| Groq LLaMA | Generate friendly AI responses |
+| Flask | Backend server connecting everything |
+| React | Mobile-friendly frontend app |
+
+---
+
+### Why It Scores Well
+
+- Uses **3+ AI techniques** — machine learning, NLP, generative AI
+- Has **real data** from a real dataset
+- Has **two complete working modules**
+- Shows **model comparison** — Random Forest vs XGBoost, SpaCy vs BERT
+- Has a **real-world impact metric** — CO₂ savings
+- Has a **polished mobile UI** that looks like a real product

@@ -11,7 +11,8 @@ CORS(app, resources={
     r"/api/*": {
         "origins": [
             "https://vemo-ai.vercel.app",
-            "http://localhost:3000"
+            "http://localhost:3000",
+            "https://vemo-smart-parking-mobility-assistant-production.up.railway.app"
         ],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]

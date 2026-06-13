@@ -17,6 +17,7 @@ export default function Memory() {
     setResult(null);
     try {
       const res = await axios.post("https://vemo-smart-parking-mobility-assistant-production.up.railway.app/api/memory", { note });
+     /* const res = await axios.post("http://localhost:5000/api/memory", { note });*/
       setResult(res.data);
     } catch {
       setError("Could not connect to backend. Make sure Flask is running.");

@@ -18,7 +18,9 @@ export default function Optimizer() {
     setError("");
     setResult(null);
     try {
-      const res = await axios.post("https://vemo-smart-parking-mobility-assistant-production.up.railway.app/api/recommend", {
+      const res = await axios.post("https://vemo-smart-parking-mobility-assistant-production.up.railway.app/api/recommend", 
+     /* const res = await axios.post("http://localhost:5000/api/recommend",*/
+        {      
         hour, dayEncoded
       });
       setResult(res.data);

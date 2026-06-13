@@ -16,7 +16,7 @@ best_model = joblib.load('../../models/best_model.pkl')
 spacy_nlp  = spacy.load('../../models/spacy_ner_model')
 
 # Groq client
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 client = Groq(api_key=GROQ_API_KEY)
 
 DAY_NAMES = {0:"Monday",1:"Tuesday",2:"Wednesday",3:"Thursday",4:"Friday",5:"Saturday",6:"Sunday"}
@@ -40,35 +40,41 @@ def predict_all_parks(hour, day_encoded, num_parks=18, prev_occupancy=50.0):
 
 def build_prompt(hour, day_name, predictions):
     park_lines = ""
+    for i, p in enumerate(predictions[:5]):
+        occ    = p['occupancy']
+        status = "🟢 Low traffic" if occ < 40 else "🟡 Moderate traffic" if occ < 70 else "🔴 Busy"
+        tag    = " ← BEST CHOICE" if i == 0 else ""
+        park_lines += f"- {p['parkId']} → {occ}% occupied ({status}){tag}\n"
 
-    for p in predictions[:5]:
-        occ = p['occupancy']
-
-        if occ < 40:
-            status = "🟢 Low traffic"
-        elif occ < 70:
-            status = "🟡 Moderate traffic"
-        else:
-            status = "🔴 Busy"
-
-        park_lines += f"- {p['parkId']} → {occ}% occupied ({status})\n"
+    best  = predictions[0]
+    worst = predictions[-1]
+    co2   = round((worst['occupancy'] - best['occupancy']) * 1.2, 1)
 
     return f"""
 You are Vemo, a friendly AI parking assistant.
 
-Your goal is to help drivers find parking quickly, reduce unnecessary driving, save time, and lower vehicle emissions.
-
 Current Situation:
-- Arrival Time: {hour}:00
-- Day: {day_name}
+- Arrival Time : {hour}:00
+- Day          : {day_name}
 
-Predicted Parking Occupancy:
+Parking Occupancy Predictions (sorted lowest to highest):
 
 {park_lines}
 
+IMPORTANT — These facts are already decided by the system. Do NOT change them:
+- Best park to go to : {best['parkId']} ({best['occupancy']}% full)
+- Busiest park       : {worst['parkId']} ({worst['occupancy']}% full)
+- CO₂ saved          : {co2}g
+
+Your job is ONLY to explain why {best['parkId']} is the best choice.
+Do NOT recommend any other park.
+Do NOT say any other park is better.
+Always refer to {best['parkId']} as the recommended park.
+
+Mention {best['parkId']} by name in your first sentence.
+
 Instructions:
-1. Recommend the BEST parking location.
-2. Explain WHY it is the best choice in simple words.
+2. Explain WHY recommended park is the best choice in simple words.
 3. Estimate how much time the driver may save compared to the busiest parking area.
 4. Estimate CO₂ emissions saved.
 5. Give one short eco-friendly parking tip.
@@ -142,6 +148,16 @@ You are Vemo.
 
 Vemo is a smart, friendly, and eco-conscious parking assistant.
 
+The AI system has already decided that {predictions[0]['parkId']} is the best parking choice.
+Your only job is to explain this recommendation clearly and positively.
+
+Rules you must follow:
+- Always recommend {predictions[0]['parkId']} — never any other park
+- Never suggest another park is better
+- Never contradict the system recommendation
+- Keep response under 120 words
+- Be friendly and use emojis
+
 Your personality:
 - Helpful
 - Positive
@@ -165,7 +181,7 @@ Avoid:
         "content": prompt
     }
 ],
-        temperature=0.7,
+        temperature=0.6,
         max_tokens=400
     )
 
@@ -275,6 +291,16 @@ Write directly to the driver as Vemo.
                 "role": "system",
                 "content": """
             You are Vemo, a friendly parking companion.
+
+            The AI system has already decided that {predictions[0]['parkId']} is the best parking choice.
+Your only job is to explain this recommendation clearly and positively.
+
+Rules you must follow:
+- Always recommend {predictions[0]['parkId']} — never any other park
+- Never suggest another park is better
+- Never contradict the system recommendation
+- Keep response under 120 words
+- Be friendly and use emojis
 
             Your personality:
             - Warm and helpful

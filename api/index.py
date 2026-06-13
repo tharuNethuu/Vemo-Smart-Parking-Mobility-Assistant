@@ -56,35 +56,41 @@ def predict_all_parks(hour, day_encoded, num_parks=18, prev_occupancy=50.0):
 
 def build_prompt(hour, day_name, predictions):
     park_lines = ""
+    for i, p in enumerate(predictions[:5]):
+        occ    = p['occupancy']
+        status = "🟢 Low traffic" if occ < 40 else "🟡 Moderate traffic" if occ < 70 else "🔴 Busy"
+        tag    = " ← BEST CHOICE" if i == 0 else ""
+        park_lines += f"- {p['parkId']} → {occ}% occupied ({status}){tag}\n"
 
-    for p in predictions[:5]:
-        occ = p['occupancy']
-
-        if occ < 40:
-            status = "🟢 Low traffic"
-        elif occ < 70:
-            status = "🟡 Moderate traffic"
-        else:
-            status = "🔴 Busy"
-
-        park_lines += f"- {p['parkId']} → {occ}% occupied ({status})\n"
+    best  = predictions[0]
+    worst = predictions[-1]
+    co2   = round((worst['occupancy'] - best['occupancy']) * 1.2, 1)
 
     return f"""
 You are Vemo, a friendly AI parking assistant.
 
-Your goal is to help drivers find parking quickly, reduce unnecessary driving, save time, and lower vehicle emissions.
-
 Current Situation:
-- Arrival Time: {hour}:00
-- Day: {day_name}
+- Arrival Time : {hour}:00
+- Day          : {day_name}
 
-Predicted Parking Occupancy:
+Parking Occupancy Predictions (sorted lowest to highest):
 
 {park_lines}
 
+IMPORTANT — These facts are already decided by the system. Do NOT change them:
+- Best park to go to : {best['parkId']} ({best['occupancy']}% full)
+- Busiest park       : {worst['parkId']} ({worst['occupancy']}% full)
+- CO₂ saved          : {co2}g
+
+Your job is ONLY to explain why {best['parkId']} is the best choice.
+Do NOT recommend any other park.
+Do NOT say any other park is better.
+Always refer to {best['parkId']} as the recommended park.
+
+Mention {best['parkId']} by name in your first sentence.
+
 Instructions:
-1. Recommend the BEST parking location.
-2. Explain WHY it is the best choice in simple words.
+2. Explain WHY recommended park is the best choice in simple words.
 3. Estimate how much time the driver may save compared to the busiest parking area.
 4. Estimate CO₂ emissions saved.
 5. Give one short eco-friendly parking tip.
@@ -155,6 +161,16 @@ def recommend():
 You are Vemo.
 
 Vemo is a smart, friendly, and eco-conscious parking assistant.
+
+The AI system has already decided that {predictions[0]['parkId']} is the best parking choice.
+Your only job is to explain this recommendation clearly and positively.
+
+Rules you must follow:
+- Always recommend {predictions[0]['parkId']} — never any other park
+- Never suggest another park is better
+- Never contradict the system recommendation
+- Keep response under 120 words
+- Be friendly and use emojis
 
 Your personality:
 - Helpful

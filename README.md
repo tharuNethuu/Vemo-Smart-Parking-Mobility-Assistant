@@ -1,4 +1,4 @@
-# Vemo AI — Smart Parking & Mobility Assistant
+# Vemo AI - Smart Parking & Mobility Assistant
 
 Vemo AI is an AI-powered parking assistant with two core modules:
 
@@ -301,8 +301,8 @@ This project is split across two free hosting platforms:
 
 ## Demo
 
-- 🎥 **Video walkthrough:** (https://vemo-ai.vercel.app/)
-- 📱 **Live app:** _[add your Vercel URL here]_
+- 🎥 **Video walkthrough:** 
+- 📱 **Live app:** https://vemo-ai.vercel.app/
 
 
 ---

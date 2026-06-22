@@ -309,7 +309,10 @@ This project is split across two free hosting platforms:
 
 ## Team
 
-_[Add team member names here]_
+EG/2021/4408	Arachchi N.A.N.N.N.
+EG/2021/4412	Arachchi W.A.T.T.W
+EG/2021/4538	Jayaweera J.A.P.V
+EG/2021/4706	Peiris P R S
 
 ---
 
